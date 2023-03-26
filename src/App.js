@@ -1,13 +1,15 @@
-import './App.css';
-import Layout from './features/layout';
+import "./App.css";
+import FilesList from "./features/filesList";
+import Layout from "./features/layout";
+
 
 function App() {
   return (
-    <Layout>
-      <div>
-        asdsadssad
-      </div>
-    </Layout>
+    
+      <Layout>
+        <FilesList />
+      </Layout>
+  
   );
 }
 
