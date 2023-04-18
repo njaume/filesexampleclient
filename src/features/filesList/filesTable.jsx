@@ -1,33 +1,22 @@
-import Table from 'react-bootstrap/Table';
+import { useMemo } from "react";
+import Table from "../../components/Table";
+import { FILES_TABLE_HEADS } from "../../constants";
 
-function FilesTable({items}) {
-  
-  return (
-    <Table striped bordered hover>
-      <thead>
-        <tr>
-          <th>File Name</th>
-          <th>Text</th>
-          <th>Number</th>
-          <th>Hex</th>
-        </tr>
-      </thead>
-      <tbody>
-        {items && items?.map(item => {
-            return item?.lines?.map(line => {
-                return (
-                    <tr key={`fileLine_${line.file}${line.hex}`}>
-                        <td>{item?.file}</td>
-                        <td>{line?.text}</td>
-                        <td>{line?.number}</td>
-                        <td>{line?.hex}</td>
-                    </tr>
-                )
-            }) 
-        })}
-      </tbody>
-    </Table>
-  );
+function FilesTable({ items }) {
+  const nItems = useMemo(() => {
+    const itemsArray = [];
+    items?.forEach((item) => {
+      item?.lines?.forEach((line) => {
+        itemsArray.push({
+          key: `fileLine_${line.file}${line.hex}`,
+          cols: [item?.file, line?.text, line?.number, line?.hex],
+        });
+      });
+    });
+    return itemsArray;
+  }, [items]);
+
+  return <Table head={FILES_TABLE_HEADS} items={nItems} />;
 }
 
 export default FilesTable;

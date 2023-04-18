@@ -22,10 +22,10 @@ export const selectFiles = (state) => state.files;
 
 // Actions
 const { setFiles, setLoading } = slice.actions;
-export const getFiles = () => async (dispatch) => {
+export const getFiles = (debouncedValue) => async (dispatch) => {
   try {
     dispatch(setLoading({ isLoading: true }));
-    const res = await server.getFiles();
+    const res = await server.getFiles(debouncedValue);
     dispatch(setFiles(res));
     dispatch(setLoading({ isLoading: false }));
   } catch (e) {

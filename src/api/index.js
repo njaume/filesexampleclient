@@ -20,9 +20,8 @@ class ApiService {
     }
   }
 
-  async getFiles() {
-    const data = await this.api.get("/files/data");
-    console.log("getFiles", data);
+  async getFiles(debouncedValue = "") {
+    const data = await this.api.get(`/files/data?fileName=${debouncedValue}`);
     return data?.data;
   }
 }
